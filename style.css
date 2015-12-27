@@ -1,0 +1,15 @@
+.navbar-brand {
+	position: relative;
+}
+
+.navbar-buildingstuff-field,
+.navbar-buildingstuff-field:hover {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: 12px auto;
+    color: #777;
+    font-size: 20px;
+    text-decoration: none;
+}
