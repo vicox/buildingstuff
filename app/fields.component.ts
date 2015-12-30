@@ -1,6 +1,6 @@
 import {Component, OnInit} from "angular2/core";
 import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "angular2/router";
-import {FieldService} from "./field.service";
+import {FieldService} from "./services/field.service";
 import {Field} from "./field";
 import {FieldComponent} from "./field.component";
 
