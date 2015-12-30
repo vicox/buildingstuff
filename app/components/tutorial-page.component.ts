@@ -36,7 +36,7 @@ export class TutorialPageComponent implements OnInit {
       let id = +this._routeParams.get("id");
       this._tutorialService.getTutorial(id)
       .then(tutorial => this.tutorial = tutorial)
-      .then(tutorial => this._fieldService.getField(tutorial.id).then(field => this.field = field));
+      .then(tutorial => this._fieldService.getField(tutorial.fieldId).then(field => this.field = field));
     }
   }
 }
