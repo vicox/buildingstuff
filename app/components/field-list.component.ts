@@ -1,14 +1,15 @@
 import {Component, OnInit} from "angular2/core";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {Router, ROUTER_DIRECTIVES} from "angular2/router";
 import {FieldService} from "../services/field.service";
 import {Field} from "../models/field";
 
 @Component({
     selector: "field-list",
+    styles: [".card {cursor: pointer}"],
     template: `
-      <div *ngFor="#field of fields" class="card text-xs-center card-buildingstuff-field">
+      <div *ngFor="#field of fields" class="card text-xs-center card-buildingstuff-field" (click)="gotoField(field)">
         <div class="card-block">
-          <h4 class="card-title"><a [routerLink]="['Field', {id: field.id}]">{{field.name}}</a></h4>
+          <h4 class="card-title">{{field.name}}</h4>
         </div>
       </div>`,
     directives: [ROUTER_DIRECTIVES],
@@ -18,7 +19,7 @@ import {Field} from "../models/field";
 export class FieldListComponent implements OnInit {
   public fields: Field[];
 
-  constructor(private _fieldService: FieldService) {
+  constructor(private _fieldService: FieldService, private _router: Router) {
   }
 
   getFields() {
@@ -31,5 +32,9 @@ export class FieldListComponent implements OnInit {
 
   ngOnInit() {
     this.fields = this.getFields();
+  }
+
+  gotoField(field: Field) {
+    this._router.navigate(["Field", { id: field.id }]);
   }
 }
