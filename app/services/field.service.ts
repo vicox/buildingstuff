@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core";
-import {Field} from "../field";
+import {Field} from "../models/field";
 
 const FIELDS: Field[] = [
   { "id": 1, "name": "Some Field" }

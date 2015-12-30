@@ -1,12 +1,14 @@
 import {Component, OnInit} from "angular2/core";
 import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
-import {FieldService} from "./services/field.service";
-import {Field} from "./field";
-import {TutorialListComponent} from "./components/tutorial-list.component";
+import {FieldService} from "..//services/field.service";
+import {Field} from "../models/field";
+import {NavigationComponent} from "./navigation.component";
+import {TutorialListComponent} from "./tutorial-list.component";
 
 @Component({
     selector: "field",
     template: `
+      <navigation [field]="field"></navigation>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6">
@@ -15,11 +17,11 @@ import {TutorialListComponent} from "./components/tutorial-list.component";
           <div class="col-md-6"></div>
         </div>
       </div>`,
-    directives: [ROUTER_DIRECTIVES, TutorialListComponent],
+    directives: [ROUTER_DIRECTIVES, NavigationComponent, TutorialListComponent],
     providers: [FieldService]
 })
 
-export class FieldComponent implements OnInit {
+export class FieldPageComponent implements OnInit {
   public field: Field;
 
   constructor(private _fieldService: FieldService,

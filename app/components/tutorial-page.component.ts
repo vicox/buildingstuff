@@ -1,27 +1,26 @@
 import {Component, OnInit} from "angular2/core";
-import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
-import {FieldService} from "./services/field.service";
-import {TutorialService} from "./services/tutorial.service";
-import {Field} from "./field";
-import {Tutorial} from "./tutorial";
+import {RouteParams} from "angular2/router";
+import {TutorialService} from "../services/tutorial.service";
+import {Tutorial} from "../models/tutorial";
+import {NavigationComponent} from "./navigation.component";
+import {TutorialDetailComponent} from "./tutorial-detail.component";
 
 @Component({
     selector: "tutorial",
     template: `
+      <navigation></navigation>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-8">
-            <div *ngIf="tutorial">
-              <h2>{{tutorial.title}}</h2>
-              <p>{{tutorial.body}}</p>
-            </div>
+            <tutorial-detail *ngIf="tutorial" [tutorial]="tutorial"></tutorial-detail>
           </div>
         </div>
       </div>`,
-  providers: [FieldService, TutorialService]
+    directives: [NavigationComponent, TutorialDetailComponent],
+    providers: [TutorialService]
 })
 
-export class TutorialComponent implements OnInit {
+export class TutorialPageComponent implements OnInit {
   public tutorial: Tutorial;
 
   constructor(private _tutorialService: TutorialService,
