@@ -7,10 +7,18 @@ import {Tutorial} from "./tutorial";
 
 @Component({
     selector: "field",
-    template: `<h4>Newest Tutorials</h4>
-        <div class="list-group">
-          <a *ngFor="#tutorial of tutorials" [routerLink]="['Tutorial', {id: tutorial.id}]" class="list-group-item">{{tutorial.title}}</a>
-        </div>`,
+    template: `
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Newest Tutorials</h4>
+            <div class="list-group">
+              <a *ngFor="#tutorial of tutorials" [routerLink]="['Tutorial', {id: tutorial.id}]" class="list-group-item">{{tutorial.title}}</a>
+            </div>
+          </div>
+          <div class="col-md-6"></div>
+        </div>
+      </div>`,
     directives: [ROUTER_DIRECTIVES],
     providers: [FieldService, TutorialService]
 })

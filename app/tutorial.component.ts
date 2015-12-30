@@ -8,10 +8,16 @@ import {Tutorial} from "./tutorial";
 @Component({
     selector: "tutorial",
     template: `
-    <div *ngIf="tutorial">
-      <h2>{{tutorial.title}}</h2>
-      <p>{{tutorial.body}}</p>
-    </div>`,
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <div *ngIf="tutorial">
+              <h2>{{tutorial.title}}</h2>
+              <p>{{tutorial.body}}</p>
+            </div>
+          </div>
+        </div>
+      </div>`,
   providers: [FieldService, TutorialService]
 })
 

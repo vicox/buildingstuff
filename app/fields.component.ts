@@ -7,12 +7,18 @@ import {FieldComponent} from "./field.component";
 @Component({
     selector: "fields",
     template: `
-         <h1 class="text-xs-center">Choose your field</h1>
-         <div *ngFor="#field of fields" class="card text-xs-center card-buildingstuff-field">
-          <div class="card-block">
-            <h4 class="card-title"><a [routerLink]="['Field', {id: field.id}]">{{field.name}}</a></h4>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-xs-center">Choose your field</h1>
+            <div *ngFor="#field of fields" class="card text-xs-center card-buildingstuff-field">
+              <div class="card-block">
+                <h4 class="card-title"><a [routerLink]="['Field', {id: field.id}]">{{field.name}}</a></h4>
+              </div>
+            </div>
           </div>
-        </div>`,
+        </div>
+      </div>`,
     directives: [ROUTER_DIRECTIVES],
     providers: [FieldService]
 })
