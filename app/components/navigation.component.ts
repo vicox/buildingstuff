@@ -7,7 +7,7 @@ import {Field} from "../models/field";
     template: `
       <nav class="navbar navbar-light bg-faded">
         <a *ngIf="field" class="navbar-buildingstuff-field" [routerLink]="['Field', {id: field.id}]">{{field.name}}</a>
-        <a class="navbar-brand" [routerLink]="['Fields']"><img alt="Brand" src="buildingstuff_logo.png"></a>
+        <a class="navbar-brand" [routerLink]="['Fields']"><img alt="Brand" src="/app/assets/images/buildingstuff_logo.png"></a>
         <!--
         <ul class="nav navbar-nav">
           <li class="nav-item active">
