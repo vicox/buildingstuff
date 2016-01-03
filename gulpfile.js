@@ -1,5 +1,10 @@
+/* jshint node: true */
+"use strict";
+
+const argv = require('yargs').argv;
 const gulp = require('gulp');
 const del = require('del');
+const gulpif = require('gulp-if');
 const typescript = require('gulp-typescript');
 const tscConfig = require('./tsconfig.json');
 const sourcemaps = require('gulp-sourcemaps');
@@ -8,8 +13,11 @@ const browserSync = require('browser-sync');
 const historyApiFallback = require('connect-history-api-fallback');
 const reload = browserSync.reload;
 
+const devDir = '.tmp';
+const prodDir = 'dist';
+
 gulp.task('clean', function () {
-  return del('dist/**/*');
+  return del((argv.production ? prodDir : devDir) + '/**/*');
 });
 
 gulp.task('tslint', function() {
@@ -19,17 +27,19 @@ gulp.task('tslint', function() {
 });
 
 gulp.task('compile', ['clean'], function () {
+  tscConfig.compilerOptions.outDir = argv.production ? prodDir + '/app' : devDir + '/app';
+
   return gulp
-    .src('app/**/*.ts')
-    .pipe(sourcemaps.init())
-    .pipe(typescript(tscConfig.compilerOptions))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/app'));
+      .src('app/**/*.ts')
+      .pipe(gulpif(!argv.production, sourcemaps.init()))
+      .pipe(typescript(tscConfig.compilerOptions))
+      .pipe(gulpif(!argv.production, sourcemaps.write('.')))
+      .pipe(gulp.dest((argv.production ? prodDir : devDir) + '/app'));
 });
 
 gulp.task('copy:assets', ['clean'], function() {
   return gulp.src(['app/**/*', 'index.html', 'style.css', '!app/**/*.ts'], { base : './' })
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(argv.production ? prodDir : devDir));
 });
 
 gulp.task('copy:libs', ['clean'], function() {
@@ -40,13 +50,13 @@ gulp.task('copy:libs', ['clean'], function() {
       'node_modules/angular2/bundles/angular2.dev.js',
       'node_modules/angular2/bundles/router.dev.js'
     ])
-    .pipe(gulp.dest('dist/lib'));
+    .pipe(gulp.dest((argv.production ? prodDir : devDir) + '/lib'));
 });
 
 gulp.task('serve', ['build'], function() {
   browserSync({
     server: {
-      baseDir: 'dist',
+      baseDir: argv.production ? prodDir : devDir,
       middleware: [historyApiFallback()]
     }
   });

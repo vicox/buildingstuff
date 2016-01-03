@@ -17,8 +17,10 @@
   "devDependencies": {
     "browser-sync": "^2.10.0",
     "connect-history-api-fallback": "^1.1.0",
+    "yargs": "^3.31.0",
     "del": "^2.1.0",
     "gulp": "^3.9.0",
+    "gulp-if": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^3.6.0",
     "gulp-typescript": "^2.8.0",
