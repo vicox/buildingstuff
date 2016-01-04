@@ -22,19 +22,16 @@ export class FieldListComponent implements OnInit {
   constructor(private _fieldService: FieldService, private _router: Router) {
   }
 
-  getFields() {
+  loadFields() {
     this.fields = [];
-
     this._fieldService.getFields().then(fields => this.fields = fields);
-
-    return this.fields;
-  }
-
-  ngOnInit() {
-    this.fields = this.getFields();
   }
 
   gotoField(field: Field) {
     this._router.navigate(["Field", { id: field.id }]);
+  }
+
+  ngOnInit() {
+    this.loadFields();
   }
 }

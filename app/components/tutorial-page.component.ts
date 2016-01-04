@@ -31,12 +31,16 @@ export class TutorialPageComponent implements OnInit {
     private _routeParams: RouteParams) {
   }
 
+  loadTutorialWithField() {
+    let id = +this._routeParams.get("id");
+    this._tutorialService.getTutorial(id)
+      .then(tutorial => {
+        this.tutorial = tutorial;
+        this._fieldService.getField(tutorial.fieldId).then(field => this.field = field);
+      });
+  }
+
   ngOnInit() {
-    if (!this.tutorial) {
-      let id = +this._routeParams.get("id");
-      this._tutorialService.getTutorial(id)
-      .then(tutorial => this.tutorial = tutorial)
-      .then(tutorial => this._fieldService.getField(tutorial.fieldId).then(field => this.field = field));
-    }
+    this.loadTutorialWithField();
   }
 }

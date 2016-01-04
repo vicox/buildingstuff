@@ -2,6 +2,7 @@
   "name": "buildingstuff",
   "version": "0.0.0",
   "scripts": {
+    "test": "gulp serve --test",
     "start": "gulp serve"
   },
   "license": "GPLv3",
@@ -25,6 +26,7 @@
     "gulp-tslint": "^3.6.0",
     "gulp-typescript": "^2.8.0",
     "tslint": "^3.2.1",
-    "typescript": "^1.7.3"
+    "typescript": "^1.7.3",
+    "jasmine-core": "^2.4.1"
   }
 }

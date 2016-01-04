@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from "angular2/core";
-import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES} from "angular2/router";
 import {TutorialService} from "../services/tutorial.service";
 import {Field} from "../models/field";
 import {Tutorial} from "../models/tutorial";
@@ -16,23 +16,21 @@ import {Tutorial} from "../models/tutorial";
 })
 
 export class TutorialListComponent implements OnInit {
-    @Input() field: Field;
-    public tutorials: Tutorial[];
+  @Input() field: Field;
+  public tutorials: Tutorial[];
 
-    constructor(private _tutorialService: TutorialService) {
+  constructor(private _tutorialService: TutorialService) {
+  }
+
+  loadTutorials() {
+    this.tutorials = [];
+
+    if (this.field) {
+      this._tutorialService.getTutorials(this.field).then(tutorials => this.tutorials = tutorials);
     }
+  }
 
-    getTutorials() {
-        this.tutorials = [];
-
-        if (this.field) {
-          this._tutorialService.getTutorials(this.field).then(tutorials => this.tutorials = tutorials);
-        }
-
-        return this.tutorials;
-    }
-
-    ngOnInit() {
-        this.tutorials = this.getTutorials();
-    }
+  ngOnInit() {
+    this.loadTutorials();
+  }
 }

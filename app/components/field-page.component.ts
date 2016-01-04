@@ -24,14 +24,15 @@ import {TutorialListComponent} from "./tutorial-list.component";
 export class FieldPageComponent implements OnInit {
   public field: Field;
 
-  constructor(private _fieldService: FieldService,
-    private _routeParams: RouteParams) {
+  constructor(private _fieldService: FieldService, private _routeParams: RouteParams) {
+  }
+
+  loadField() {
+    let id = +this._routeParams.get("id");
+    this._fieldService.getField(id).then(field => this.field = field);
   }
 
   ngOnInit() {
-    if (!this.field) {
-      let id = +this._routeParams.get("id");
-      this._fieldService.getField(id).then(field => this.field = field);
-    }
+    this.loadField();
   }
 }
