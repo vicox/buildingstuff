@@ -4,6 +4,8 @@
 const argv = require('yargs').argv;
 const gulp = require('gulp');
 const del = require('del');
+const merge = require('merge-stream');
+const rename = require("gulp-rename");
 const gulpif = require('gulp-if');
 const typescript = require('gulp-typescript');
 const tscConfig = require('./tsconfig.json');
@@ -48,25 +50,47 @@ gulp.task('copy:assets', ['clean'], function() {
 });
 
 gulp.task('copy:libs', ['clean'], function() {
-  let libs = [
-    'node_modules/angular2/bundles/angular2-polyfills.js',
-    'node_modules/systemjs/dist/system.src.js',
-    'node_modules/rxjs/bundles/Rx.js',
-    'node_modules/angular2/bundles/angular2.dev.js',
-    'node_modules/angular2/bundles/router.dev.js'
-  ];
-
-  if (!argv.production) {
-    libs.push(
-      'node_modules/jasmine-core/lib/jasmine-core/jasmine.css',
-      'node_modules/jasmine-core/lib/jasmine-core/jasmine.js',
-      'node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js',
-      'node_modules/jasmine-core/lib/jasmine-core/boot.js'
+  if (argv.production) {
+    return merge(
+      gulp.src("node_modules/angular2/bundles/angular2-polyfills.min.js")
+        .pipe(rename("angular2-polyfills.js"))
+        .pipe(gulp.dest(prodDir + '/lib')),
+      gulp.src("node_modules/systemjs/dist/system.js")
+        .pipe(gulp.dest(prodDir + '/lib')),
+      gulp.src("node_modules/rxjs/bundles/Rx.min.js")
+        .pipe(rename("Rx.js"))
+        .pipe(gulp.dest(prodDir + '/lib')),
+      gulp.src("node_modules/angular2/bundles/angular2.min.js")
+        .pipe(rename("angular2.js"))
+        .pipe(gulp.dest(prodDir + '/lib')),
+      gulp.src("node_modules/angular2/bundles/router.min.js")
+        .pipe(rename("router.js"))
+        .pipe(gulp.dest(prodDir + '/lib'))
       );
+  } else {
+    return merge(
+      gulp.src("node_modules/angular2/bundles/angular2-polyfills.js")
+        .pipe(gulp.dest(devDir + '/lib')),
+      gulp.src("node_modules/systemjs/dist/system.src.js")
+        .pipe(rename("system.js"))
+        .pipe(gulp.dest(devDir + '/lib')),
+      gulp.src("node_modules/rxjs/bundles/Rx.js")
+        .pipe(gulp.dest(devDir + '/lib')),
+      gulp.src("node_modules/angular2/bundles/angular2.dev.js")
+        .pipe(rename("angular2.js"))
+        .pipe(gulp.dest(devDir + '/lib')),
+      gulp.src("node_modules/angular2/bundles/router.dev.js")
+        .pipe(rename("router.js"))
+        .pipe(gulp.dest(devDir + '/lib')),
+      gulp.src([
+        'node_modules/jasmine-core/lib/jasmine-core/jasmine.css',
+        'node_modules/jasmine-core/lib/jasmine-core/jasmine.js',
+        'node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js',
+        'node_modules/jasmine-core/lib/jasmine-core/boot.js'
+       ])
+        .pipe(gulp.dest(devDir + '/lib'))
+      ); 
   }
-
-  return gulp.src(libs)
-    .pipe(gulp.dest((argv.production ? prodDir : devDir) + '/lib'));
 });
 
 gulp.task('serve', ['build'], function() {
