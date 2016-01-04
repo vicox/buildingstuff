@@ -39,5 +39,3 @@ System.register(["angular2/core", "./field-list.component", "./navigation.compon
         }
     }
 });
-
-//# sourceMappingURL=fields-page.component.js.map

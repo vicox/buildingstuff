@@ -26,16 +26,15 @@ System.register(["angular2/core", "angular2/router", "../services/tutorial.servi
                 function TutorialListComponent(_tutorialService) {
                     this._tutorialService = _tutorialService;
                 }
-                TutorialListComponent.prototype.getTutorials = function () {
+                TutorialListComponent.prototype.loadTutorials = function () {
                     var _this = this;
                     this.tutorials = [];
                     if (this.field) {
                         this._tutorialService.getTutorials(this.field).then(function (tutorials) { return _this.tutorials = tutorials; });
                     }
-                    return this.tutorials;
                 };
                 TutorialListComponent.prototype.ngOnInit = function () {
-                    this.tutorials = this.getTutorials();
+                    this.loadTutorials();
                 };
                 __decorate([
                     core_1.Input(), 
@@ -56,5 +55,3 @@ System.register(["angular2/core", "angular2/router", "../services/tutorial.servi
         }
     }
 });
-
-//# sourceMappingURL=tutorial-list.component.js.map

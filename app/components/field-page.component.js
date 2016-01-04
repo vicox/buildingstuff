@@ -33,12 +33,13 @@ System.register(["angular2/core", "angular2/router", "..//services/field.service
                     this._fieldService = _fieldService;
                     this._routeParams = _routeParams;
                 }
-                FieldPageComponent.prototype.ngOnInit = function () {
+                FieldPageComponent.prototype.loadField = function () {
                     var _this = this;
-                    if (!this.field) {
-                        var id = +this._routeParams.get("id");
-                        this._fieldService.getField(id).then(function (field) { return _this.field = field; });
-                    }
+                    var id = +this._routeParams.get("id");
+                    this._fieldService.getField(id).then(function (field) { return _this.field = field; });
+                };
+                FieldPageComponent.prototype.ngOnInit = function () {
+                    this.loadField();
                 };
                 FieldPageComponent = __decorate([
                     core_1.Component({
@@ -55,5 +56,3 @@ System.register(["angular2/core", "angular2/router", "..//services/field.service
         }
     }
 });
-
-//# sourceMappingURL=field-page.component.js.map

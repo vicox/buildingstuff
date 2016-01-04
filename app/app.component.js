@@ -52,5 +52,3 @@ System.register(["angular2/core", "angular2/router", "./components/fields-page.c
         }
     }
 });
-
-//# sourceMappingURL=app.component.js.map

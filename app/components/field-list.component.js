@@ -27,17 +27,16 @@ System.register(["angular2/core", "angular2/router", "../services/field.service"
                     this._fieldService = _fieldService;
                     this._router = _router;
                 }
-                FieldListComponent.prototype.getFields = function () {
+                FieldListComponent.prototype.loadFields = function () {
                     var _this = this;
                     this.fields = [];
                     this._fieldService.getFields().then(function (fields) { return _this.fields = fields; });
-                    return this.fields;
-                };
-                FieldListComponent.prototype.ngOnInit = function () {
-                    this.fields = this.getFields();
                 };
                 FieldListComponent.prototype.gotoField = function (field) {
                     this._router.navigate(["Field", { id: field.id }]);
+                };
+                FieldListComponent.prototype.ngOnInit = function () {
+                    this.loadFields();
                 };
                 FieldListComponent = __decorate([
                     core_1.Component({
@@ -55,5 +54,3 @@ System.register(["angular2/core", "angular2/router", "../services/field.service"
         }
     }
 });
-
-//# sourceMappingURL=field-list.component.js.map

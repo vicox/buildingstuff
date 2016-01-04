@@ -37,14 +37,17 @@ System.register(["angular2/core", "angular2/router", "../services/tutorial.servi
                     this._fieldService = _fieldService;
                     this._routeParams = _routeParams;
                 }
-                TutorialPageComponent.prototype.ngOnInit = function () {
+                TutorialPageComponent.prototype.loadTutorialWithField = function () {
                     var _this = this;
-                    if (!this.tutorial) {
-                        var id = +this._routeParams.get("id");
-                        this._tutorialService.getTutorial(id)
-                            .then(function (tutorial) { return _this.tutorial = tutorial; })
-                            .then(function (tutorial) { return _this._fieldService.getField(tutorial.fieldId).then(function (field) { return _this.field = field; }); });
-                    }
+                    var id = +this._routeParams.get("id");
+                    this._tutorialService.getTutorial(id)
+                        .then(function (tutorial) {
+                        _this.tutorial = tutorial;
+                        _this._fieldService.getField(tutorial.fieldId).then(function (field) { return _this.field = field; });
+                    });
+                };
+                TutorialPageComponent.prototype.ngOnInit = function () {
+                    this.loadTutorialWithField();
                 };
                 TutorialPageComponent = __decorate([
                     core_1.Component({
@@ -61,5 +64,3 @@ System.register(["angular2/core", "angular2/router", "../services/tutorial.servi
         }
     }
 });
-
-//# sourceMappingURL=tutorial-page.component.js.map

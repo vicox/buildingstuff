@@ -39,5 +39,3 @@ System.register(["angular2/core"], function(exports_1) {
         }
     }
 });
-
-//# sourceMappingURL=field.service.js.map
