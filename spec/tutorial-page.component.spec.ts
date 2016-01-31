@@ -1,9 +1,9 @@
 import {RouteParams} from "angular2/router";
-import {TutorialService} from "../services/tutorial.service";
-import {FieldService} from "../services/field.service";
-import {Tutorial} from "../models/tutorial";
-import {Field} from "../models/field";
-import {TutorialPageComponent} from "./tutorial-page.component";
+import {TutorialService} from "../app/services/tutorial.service";
+import {FieldService} from "../app/services/field.service";
+import {Tutorial} from "../app/models/tutorial";
+import {Field} from "../app/models/field";
+import {TutorialPageComponent} from "../app/components/tutorial-page.component";
 
 describe("TutorialPageComponent", () => {
   let routeParams: RouteParams;

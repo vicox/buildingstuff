@@ -32,11 +32,11 @@ gulp.task('compile', ['clean'], function () {
   tscConfig.compilerOptions.outDir = argv.production ? prodDir + '/app' : devDir + '/app';
 
   return gulp
-      .src(argv.production ? ['app/**/*.ts', '!app/**/*.spec.ts'] : 'app/**/*.ts')
+      .src(argv.production ? ['app/**/*.ts'] : ['app/**/*.ts', 'spec/**/*.ts'])
       .pipe(gulpif(!argv.production, sourcemaps.init()))
       .pipe(typescript(tscConfig.compilerOptions))
       .pipe(gulpif(!argv.production, sourcemaps.write('.')))
-      .pipe(gulp.dest((argv.production ? prodDir : devDir) + '/app'));
+      .pipe(gulp.dest((argv.production ? prodDir + '/app' : devDir)));
 });
 
 gulp.task('copy:assets', ['clean'], function() {
@@ -89,7 +89,7 @@ gulp.task('copy:libs', ['clean'], function() {
         'node_modules/jasmine-core/lib/jasmine-core/boot.js'
        ])
         .pipe(gulp.dest(devDir + '/lib'))
-      ); 
+      );
   }
 });
 
@@ -106,8 +106,9 @@ gulp.task('serve', ['build'], function() {
   });
 
   let watchFiles = ['app/**/*', 'index.html', 'style.css'];
-  
+
   if (!argv.production) {
+    watchFiles.push('spec/**/*');
     watchFiles.push('unit-tests.html');
   }
 

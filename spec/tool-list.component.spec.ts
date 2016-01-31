@@ -1,7 +1,7 @@
-import {ToolService} from "../services/tool.service";
-import {Tool} from "../models/tool";
-import {Tutorial} from "../models/tutorial";
-import {ToolListComponent} from "./tool-list.component";
+import {ToolService} from "../app/services/tool.service";
+import {Tool} from "../app/models/tool";
+import {Tutorial} from "../app/models/tutorial";
+import {ToolListComponent} from "../app/components/tool-list.component";
 
 describe("ToolListComponent", () => {
   let toolService: ToolService;

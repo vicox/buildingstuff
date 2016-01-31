@@ -1,5 +1,5 @@
-import {Field} from "../models/field";
-import {ToolService} from "./tool.service";
+import {Field} from "../app/models/field";
+import {ToolService} from "../app/services/tool.service";
 
 describe("ToolService", () => {
     let toolService: ToolService;

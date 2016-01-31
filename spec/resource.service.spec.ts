@@ -1,5 +1,5 @@
-import {Field} from "../models/field";
-import {ResourceService} from "./resource.service";
+import {Field} from "../app/models/field";
+import {ResourceService} from "../app/services/resource.service";
 
 describe("ResourceService", () => {
     let resourceService: ResourceService;

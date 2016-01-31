@@ -16,18 +16,19 @@
   <script>
     System.config({
       packages: {
-        'app': {defaultExtension: 'js'}
+        'app': {defaultExtension: 'js'},
+        'spec': {defaultExtension: 'js'}
       }
     });
     Promise.all([
-      System.import('app/components/field-list.component.spec'),
-      System.import('app/components/field-page.component.spec'),
-      System.import('app/components/tutorial-list.component.spec'),
-      System.import('app/components/tutorial-page.component.spec'),
-      System.import('app/components/tool-list.component.spec'),
-      System.import('app/components/resource-list.component.spec'),
-      System.import('app/services/tool.service.spec'),
-      System.import('app/services/resource.service.spec')
+      System.import('spec/field-list.component.spec'),
+      System.import('spec/field-page.component.spec'),
+      System.import('spec/tutorial-list.component.spec'),
+      System.import('spec/tutorial-page.component.spec'),
+      System.import('spec/tool-list.component.spec'),
+      System.import('spec/resource-list.component.spec'),
+      System.import('spec/tool.service.spec'),
+      System.import('spec/resource.service.spec')
     ]).then(window.onload)
       .catch(console.error.bind(console));
   </script>

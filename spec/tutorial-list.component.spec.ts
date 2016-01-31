@@ -1,7 +1,7 @@
-import {TutorialService} from "../services/tutorial.service";
-import {Field} from "../models/field";
-import {Tutorial} from "../models/tutorial";
-import {TutorialListComponent} from "./tutorial-list.component";
+import {TutorialService} from "../app/services/tutorial.service";
+import {Field} from "../app/models/field";
+import {Tutorial} from "../app/models/tutorial";
+import {TutorialListComponent} from "../app/components/tutorial-list.component";
 
 describe("TutorialListComponent", () => {
   let tutorialService: TutorialService;

@@ -1,7 +1,7 @@
 import {Router} from "angular2/router";
-import {FieldService} from "../services/field.service";
-import {Field} from "../models/field";
-import {FieldListComponent} from "./field-list.component";
+import {FieldService} from "../app/services/field.service";
+import {Field} from "../app/models/field";
+import {FieldListComponent} from "../app/components/field-list.component";
 
 describe("FieldListComponent", () => {
   let fieldService: FieldService;
