@@ -1,7 +1,7 @@
 import {Component, Input} from "angular2/core";
-import {Tutorial} from "../models/tutorial";
-import {ToolListComponent} from "./tool-list.component";
-import {ResourceListComponent} from "./resource-list.component";
+import {Tutorial} from "../../models/tutorial";
+import {ToolListComponent} from "../tool/tool-list.component";
+import {ResourceListComponent} from "../resource/resource-list.component";
 
 @Component({
     selector: "tutorial-detail",

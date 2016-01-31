@@ -1,5 +1,5 @@
 import {Component} from "angular2/core";
-import {FieldListComponent} from "./field-list.component";
+import {FieldListComponent} from "./field/field-list.component";
 import {NavigationComponent} from "./navigation.component";
 
 @Component({

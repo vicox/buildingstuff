@@ -1,7 +1,7 @@
 import {Component, OnInit} from "angular2/core";
 import {Router, ROUTER_DIRECTIVES} from "angular2/router";
-import {FieldService} from "../services/field.service";
-import {Field} from "../models/field";
+import {FieldService} from "../../services/field.service";
+import {Field} from "../../models/field";
 
 @Component({
     selector: "field-list",

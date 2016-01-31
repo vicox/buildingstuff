@@ -1,9 +1,9 @@
 import {Component, OnInit} from "angular2/core";
 import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
-import {FieldService} from "..//services/field.service";
+import {FieldService} from "../services/field.service";
 import {Field} from "../models/field";
 import {NavigationComponent} from "./navigation.component";
-import {TutorialListComponent} from "./tutorial-list.component";
+import {TutorialListComponent} from "./tutorial/tutorial-list.component";
 
 @Component({
     selector: "field",

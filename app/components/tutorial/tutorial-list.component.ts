@@ -1,8 +1,8 @@
 import {Component, OnInit, Input} from "angular2/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
-import {TutorialService} from "../services/tutorial.service";
-import {Field} from "../models/field";
-import {Tutorial} from "../models/tutorial";
+import {TutorialService} from "../../services/tutorial.service";
+import {Field} from "../../models/field";
+import {Tutorial} from "../../models/tutorial";
 
 @Component({
     selector: "tutorial-list",

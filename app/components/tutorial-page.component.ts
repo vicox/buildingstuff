@@ -5,7 +5,7 @@ import {FieldService} from "../services/field.service";
 import {Tutorial} from "../models/tutorial";
 import {Field} from "../models/field";
 import {NavigationComponent} from "./navigation.component";
-import {TutorialDetailComponent} from "./tutorial-detail.component";
+import {TutorialDetailComponent} from "./tutorial/tutorial-detail.component";
 
 @Component({
     selector: "tutorial",

@@ -1,7 +1,7 @@
 import {ResourceService} from "../app/services/resource.service";
 import {Resource} from "../app/models/resource";
 import {Tutorial} from "../app/models/tutorial";
-import {ResourceListComponent} from "../app/components/resource-list.component";
+import {ResourceListComponent} from "../app/components/resource/resource-list.component";
 
 describe("ResourceListComponent", () => {
   let resourceService: ResourceService;

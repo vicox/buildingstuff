@@ -1,7 +1,7 @@
 import {Component, Input} from "angular2/core";
-import {Tutorial} from "../models/tutorial";
-import {Tool} from "../models/tool";
-import {ToolService} from "../services/tool.service";
+import {Tutorial} from "../../models/tutorial";
+import {Tool} from "../../models/tool";
+import {ToolService} from "../../services/tool.service";
 
 @Component({
     selector: "tool-list",

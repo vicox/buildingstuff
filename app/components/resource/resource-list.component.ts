@@ -1,7 +1,7 @@
 import {Component, Input} from "angular2/core";
-import {Tutorial} from "../models/tutorial";
-import {Resource} from "../models/resource";
-import {ResourceService} from "../services/resource.service";
+import {Tutorial} from "../../models/tutorial";
+import {Resource} from "../../models/resource";
+import {ResourceService} from "../../services/resource.service";
 
 @Component({
     selector: "resource-list",
