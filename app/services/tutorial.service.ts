@@ -1,22 +1,26 @@
 import {Injectable} from "angular2/core";
+import {Http} from "angular2/http";
 import {Field} from "../models/field";
 import {Tutorial} from "../models/tutorial";
-
-const TUTORIALS: Tutorial[] = [
-  { "id": 1, "fieldId": 1, "toolIds": [1, 2, 3], "resourceIds": [1, 2, 3], "title": "Tutorial 1", "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean faucibus tincidunt mauris eget mattis. Cras nec fermentum ex. Aenean maximus dictum ligula non vulputate. Vivamus eget diam ac justo imperdiet aliquet. Proin et sagittis lectus, ut eleifend purus. Duis eget venenatis libero. Cras gravida pulvinar enim, a ultrices turpis fermentum non. Phasellus fermentum bibendum pellentesque. Mauris aliquam auctor augue, vitae lobortis mi luctus sed. Curabitur in tempor lectus, at suscipit augue. Etiam ullamcorper elementum nisi." },
-  { "id": 2, "fieldId": 1, "toolIds": [], "resourceIds": [], "title": "Tutorial 2", "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean faucibus tincidunt mauris eget mattis. Cras nec fermentum ex. Aenean maximus dictum ligula non vulputate. Vivamus eget diam ac justo imperdiet aliquet. Proin et sagittis lectus, ut eleifend purus. Duis eget venenatis libero. Cras gravida pulvinar enim, a ultrices turpis fermentum non. Phasellus fermentum bibendum pellentesque. Mauris aliquam auctor augue, vitae lobortis mi luctus sed. Curabitur in tempor lectus, at suscipit augue. Etiam ullamcorper elementum nisi." },
-  { "id": 3, "fieldId": 1, "toolIds": [], "resourceIds": [], "title": "Tutorial 3", "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean faucibus tincidunt mauris eget mattis. Cras nec fermentum ex. Aenean maximus dictum ligula non vulputate. Vivamus eget diam ac justo imperdiet aliquet. Proin et sagittis lectus, ut eleifend purus. Duis eget venenatis libero. Cras gravida pulvinar enim, a ultrices turpis fermentum non. Phasellus fermentum bibendum pellentesque. Mauris aliquam auctor augue, vitae lobortis mi luctus sed. Curabitur in tempor lectus, at suscipit augue. Etiam ullamcorper elementum nisi." }
-];
+import 'rxjs/Rx';
 
 @Injectable()
 export class TutorialService {
+
+  constructor(private _http:Http) {
+  }
+
   getTutorials(field: Field) {
-    return Promise.resolve(TUTORIALS)
-        .then(tutorials => tutorials.filter(t => t.fieldId === field.id));
+    return this._http.get('server/tutorials.json')
+    .map(res => res.json())
+    .toPromise()
+    .then(tutorials => tutorials.filter(t => t.fieldId === field.id));
   }
 
   getTutorial(id: number) {
-    return Promise.resolve(TUTORIALS)
-      .then(tutorials => tutorials.filter(t => t.id === id)[0]);
+    return this._http.get('server/tutorials.json')
+    .map(res => res.json())
+    .toPromise()
+    .then(tutorials => tutorials.filter(t => t.id === id)[0]);
   }
 }

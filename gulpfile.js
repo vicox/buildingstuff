@@ -28,15 +28,28 @@ gulp.task('tslint', function() {
     .pipe(tslint.report('verbose'));
 });
 
-gulp.task('compile', ['clean'], function () {
-  tscConfig.compilerOptions.outDir = argv.production ? prodDir + '/app' : devDir + '/app';
+gulp.task('compile:app', ['clean'], function () {
+  tscConfig.compilerOptions.outDir = (argv.production ? prodDir: devDir) + '/app' ;
 
   return gulp
-      .src(argv.production ? ['app/**/*.ts'] : ['app/**/*.ts', 'spec/**/*.ts'])
+      .src('app/**/*.ts')
       .pipe(gulpif(!argv.production, sourcemaps.init()))
       .pipe(typescript(tscConfig.compilerOptions))
       .pipe(gulpif(!argv.production, sourcemaps.write('.')))
-      .pipe(gulp.dest((argv.production ? prodDir + '/app' : devDir)));
+      .pipe(gulp.dest(tscConfig.compilerOptions.outDir));
+});
+
+gulp.task('compile:spec', ['clean', 'compile:app'], function () {
+  if (!argv.production) {
+    tscConfig.compilerOptions.outDir = devDir;
+
+    return gulp
+        .src('spec/**/*.ts')
+        .pipe(sourcemaps.init())
+        .pipe(typescript(tscConfig.compilerOptions))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(tscConfig.compilerOptions.outDir));
+  }
 });
 
 gulp.task('copy:assets', ['clean'], function() {
@@ -65,6 +78,9 @@ gulp.task('copy:libs', ['clean'], function() {
         .pipe(gulp.dest(prodDir + '/lib')),
       gulp.src("node_modules/angular2/bundles/router.min.js")
         .pipe(rename("router.js"))
+        .pipe(gulp.dest(prodDir + '/lib')),
+      gulp.src("node_modules/angular2/bundles/http.min.js")
+        .pipe(rename("http.js"))
         .pipe(gulp.dest(prodDir + '/lib'))
       );
   } else {
@@ -82,6 +98,9 @@ gulp.task('copy:libs', ['clean'], function() {
       gulp.src("node_modules/angular2/bundles/router.dev.js")
         .pipe(rename("router.js"))
         .pipe(gulp.dest(devDir + '/lib')),
+      gulp.src("node_modules/angular2/bundles/http.dev.js")
+        .pipe(rename("http.js"))
+        .pipe(gulp.dest(devDir + '/lib')),
       gulp.src([
         'node_modules/jasmine-core/lib/jasmine-core/jasmine.css',
         'node_modules/jasmine-core/lib/jasmine-core/jasmine.js',
@@ -91,6 +110,11 @@ gulp.task('copy:libs', ['clean'], function() {
         .pipe(gulp.dest(devDir + '/lib'))
       );
   }
+});
+
+gulp.task('copy:server', ['clean'], function() {
+  return gulp.src("server/**/*")
+    .pipe(gulp.dest((argv.production ? prodDir : devDir) + '/server'));
 });
 
 gulp.task('serve', ['build'], function() {
@@ -105,7 +129,7 @@ gulp.task('serve', ['build'], function() {
     startPath: argv.test ? 'unit-tests.html' : ''
   });
 
-  let watchFiles = ['app/**/*', 'index.html', 'style.css'];
+  let watchFiles = ['app/**/*', 'index.html', 'style.css', 'server/**/*'];
 
   if (!argv.production) {
     watchFiles.push('spec/**/*');
@@ -115,6 +139,6 @@ gulp.task('serve', ['build'], function() {
   gulp.watch(watchFiles, ['buildAndReload']);
 });
 
-gulp.task('build', ['tslint', 'compile', 'copy:assets', 'copy:libs']);
+gulp.task('build', ['tslint', 'compile:app', 'compile:spec', 'copy:assets', 'copy:libs', 'copy:server']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']);
