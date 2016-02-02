@@ -105,6 +105,7 @@ gulp.task('copy:libs', ['clean'], function() {
         .pipe(rename("http.js"))
         .pipe(gulp.dest(devDir + '/lib')),
       gulp.src([
+        'node_modules/angular2/bundles/testing.dev.js',
         'node_modules/jasmine-core/lib/jasmine-core/jasmine.css',
         'node_modules/jasmine-core/lib/jasmine-core/jasmine.js',
         'node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js',
