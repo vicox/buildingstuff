@@ -116,10 +116,24 @@ gulp.task('copy:libs', ['clean'], function() {
 });
 
 gulp.task('markdown', ['clean'], function() {
-  return gulp.src('content/tutorials/**/*.md')
-    .pipe(gutil.buffer())
-    .pipe(markdown('tutorials.json'))
-    .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server'));
+  return merge(
+    gulp.src('content/fields/**/*.md')
+      .pipe(gutil.buffer())
+      .pipe(markdown('fields.json'))
+      .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server')),
+    gulp.src('content/tutorials/**/*.md')
+      .pipe(gutil.buffer())
+      .pipe(markdown('tutorials.json'))
+      .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server')),
+    gulp.src('content/tools/**/*.md')
+      .pipe(gutil.buffer())
+      .pipe(markdown('tools.json'))
+      .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server')),
+    gulp.src('content/resources/**/*.md')
+      .pipe(gutil.buffer())
+      .pipe(markdown('resources.json'))
+      .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server'))
+  );
 });
 
 gulp.task('server', ['markdown'], function() {
