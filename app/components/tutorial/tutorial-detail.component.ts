@@ -15,7 +15,7 @@ import {ResourceListComponent} from "../resource/resource-list.component";
           <resource-list [tutorial]="tutorial"></resource-list>
         </div>
       </div>
-      <p>{{tutorial.body}}</p>`,
+      <p [innerHTML]="tutorial.body"></p>`,
     directives: [ToolListComponent, ResourceListComponent]
 })
 

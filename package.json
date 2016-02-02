@@ -18,17 +18,20 @@
   "devDependencies": {
     "browser-sync": "^2.10.0",
     "connect-history-api-fallback": "^1.1.0",
-    "yargs": "^3.31.0",
     "del": "^2.1.0",
-    "merge-stream": "^1.0.0",
     "gulp": "^3.9.0",
-    "gulp-rename": "^1.2.2",
     "gulp-if": "^2.0.0",
+    "gulp-json-transform": "^0.3.0",
+    "gulp-markdown-to-json": "^0.2.1",
+    "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^3.6.0",
     "gulp-typescript": "^2.8.0",
+    "gulp-util": "^3.0.7",
+    "jasmine-core": "^2.4.1",
+    "merge-stream": "^1.0.0",
     "tslint": "^3.2.1",
     "typescript": "^1.7.3",
-    "jasmine-core": "^2.4.1"
+    "yargs": "^3.31.0"
   }
 }

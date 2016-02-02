@@ -3,6 +3,7 @@
 
 const argv = require('yargs').argv;
 const gulp = require('gulp');
+const gutil = require('gulp-util');
 const del = require('del');
 const merge = require('merge-stream');
 const rename = require("gulp-rename");
@@ -14,6 +15,8 @@ const tslint = require('gulp-tslint');
 const browserSync = require('browser-sync');
 const historyApiFallback = require('connect-history-api-fallback');
 const reload = browserSync.reload;
+const markdown = require('gulp-markdown-to-json');
+const jsonTransform = require('gulp-json-transform');
 
 const devDir = '.tmp';
 const prodDir = 'dist';
@@ -29,7 +32,7 @@ gulp.task('tslint', function() {
 });
 
 gulp.task('compile:app', ['clean'], function () {
-  tscConfig.compilerOptions.outDir = (argv.production ? prodDir: devDir) + '/app' ;
+  tscConfig.compilerOptions.outDir = (argv.production ? prodDir: devDir) + '/app';
 
   return gulp
       .src('app/**/*.ts')
@@ -112,9 +115,21 @@ gulp.task('copy:libs', ['clean'], function() {
   }
 });
 
-gulp.task('copy:server', ['clean'], function() {
-  return gulp.src("server/**/*")
-    .pipe(gulp.dest((argv.production ? prodDir : devDir) + '/server'));
+gulp.task('markdown', ['clean'], function() {
+  return gulp.src('content/tutorials/**/*.md')
+    .pipe(gutil.buffer())
+    .pipe(markdown('tutorials.json'))
+    .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server'));
+});
+
+gulp.task('server', ['markdown'], function() {
+  let dir = (argv.production ? prodDir: devDir) + '/server';
+
+  return gulp.src(dir + '/**/*.json')
+    .pipe(jsonTransform(function(data) {
+      return Object.keys(data).map(function(k) { return data[k]; });
+    }))
+    .pipe(gulp.dest(dir));
 });
 
 gulp.task('serve', ['build'], function() {
@@ -129,7 +144,7 @@ gulp.task('serve', ['build'], function() {
     startPath: argv.test ? 'unit-tests.html' : ''
   });
 
-  let watchFiles = ['app/**/*', 'index.html', 'style.css', 'server/**/*'];
+  let watchFiles = ['app/**/*', 'index.html', 'style.css', 'content/**/*'];
 
   if (!argv.production) {
     watchFiles.push('spec/**/*');
@@ -139,6 +154,6 @@ gulp.task('serve', ['build'], function() {
   gulp.watch(watchFiles, ['buildAndReload']);
 });
 
-gulp.task('build', ['tslint', 'compile:app', 'compile:spec', 'copy:assets', 'copy:libs', 'copy:server']);
+gulp.task('build', ['tslint', 'compile:app', 'compile:spec', 'copy:assets', 'copy:libs', 'server']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']);
