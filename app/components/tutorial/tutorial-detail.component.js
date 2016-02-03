@@ -1,4 +1,4 @@
-System.register(["angular2/core", "./tool-list.component", "./resource-list.component"], function(exports_1) {
+System.register(["angular2/core", "../tool/tool-list.component", "../resource/resource-list.component"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -32,7 +32,7 @@ System.register(["angular2/core", "./tool-list.component", "./resource-list.comp
                 TutorialDetailComponent = __decorate([
                     core_1.Component({
                         selector: "tutorial-detail",
-                        template: "\n      <h2>{{tutorial.title}}</h2>\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <tool-list [tutorial]=\"tutorial\"></tool-list>\n        </div>\n        <div class=\"col-sm-6\">\n          <resource-list [tutorial]=\"tutorial\"></resource-list>\n        </div>\n      </div>\n      <p>{{tutorial.body}}</p>",
+                        template: "\n      <h2>{{tutorial.title}}</h2>\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <tool-list [tutorial]=\"tutorial\"></tool-list>\n        </div>\n        <div class=\"col-sm-6\">\n          <resource-list [tutorial]=\"tutorial\"></resource-list>\n        </div>\n      </div>\n      <p [innerHTML]=\"tutorial.body\"></p>",
                         directives: [tool_list_component_1.ToolListComponent, resource_list_component_1.ResourceListComponent]
                     }), 
                     __metadata('design:paramtypes', [])
