@@ -4,6 +4,7 @@ import {NavigationComponent} from "./navigation.component";
 
 @Component({
     selector: "fields",
+    styles: ["h1 {margin-bottom: 24px}"],
     template: `
       <navigation></navigation>
       <div class="container-fluid">
