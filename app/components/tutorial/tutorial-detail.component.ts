@@ -6,7 +6,7 @@ import {ResourceListComponent} from "../resource/resource-list.component";
 @Component({
     selector: "tutorial-detail",
     template: `
-      <h2>{{tutorial.title}}</h2>
+      <h1>{{tutorial.title}}</h1>
       <div class="row">
         <div class="col-sm-6">
           <tool-list [tutorial]="tutorial"></tool-list>

@@ -124,7 +124,10 @@ gulp.task('markdown', ['clean'], function() {
       .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server')),
     gulp.src('content/tutorials/**/*.md')
       .pipe(gutil.buffer())
-      .pipe(markdown('tutorials.json'))
+      .pipe(markdown('tutorials.json', {
+        highlight: function (code) {
+          return require('highlight.js').highlightAuto(code).value;
+        }}))
       .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server')),
     gulp.src('content/tools/**/*.md')
       .pipe(gutil.buffer())
