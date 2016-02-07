@@ -129,13 +129,13 @@ gulp.task('markdown', ['clean'], function() {
           return require('highlight.js').highlightAuto(code).value;
         }}))
       .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server')),
-    gulp.src('content/tools/**/*.md')
+    gulp.src('content/element-types/**/*.md')
       .pipe(gutil.buffer())
-      .pipe(markdown('tools.json'))
+      .pipe(markdown('element-types.json'))
       .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server')),
-    gulp.src('content/resources/**/*.md')
+    gulp.src('content/elements/**/*.md')
       .pipe(gutil.buffer())
-      .pipe(markdown('resources.json'))
+      .pipe(markdown('elements.json'))
       .pipe(gulp.dest((argv.production ? prodDir: devDir) + '/server'))
   );
 });
