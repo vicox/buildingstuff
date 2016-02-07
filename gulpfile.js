@@ -144,8 +144,11 @@ gulp.task('server', ['markdown'], function() {
   let dir = (argv.production ? prodDir: devDir) + '/server';
 
   return gulp.src(dir + '/**/*.json')
-    .pipe(jsonTransform(function(data) {
-      return Object.keys(data).map(function(k) { return data[k]; });
+    .pipe(jsonTransform(object => {
+      return Object.keys(object).map(key => {
+        object[key].id = parseInt(key);
+        return object[key];
+      });
     }))
     .pipe(gulp.dest(dir));
 });
