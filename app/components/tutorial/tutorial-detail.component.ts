@@ -1,22 +1,14 @@
 import {Component, Input} from "angular2/core";
 import {Tutorial} from "../../models/tutorial";
-import {ToolListComponent} from "../tool/tool-list.component";
-import {ResourceListComponent} from "../resource/resource-list.component";
+import {ElementListComponent} from "../element/element-list.component";
 
 @Component({
     selector: "tutorial-detail",
     template: `
       <h1>{{tutorial.title}}</h1>
-      <div class="row">
-        <div class="col-sm-6">
-          <tool-list [tutorial]="tutorial"></tool-list>
-        </div>
-        <div class="col-sm-6">
-          <resource-list [tutorial]="tutorial"></resource-list>
-        </div>
-      </div>
+      <element-list [tutorial]="tutorial"></element-list>
       <p [innerHTML]="tutorial.body"></p>`,
-    directives: [ToolListComponent, ResourceListComponent]
+    directives: [ElementListComponent]
 })
 
 export class TutorialDetailComponent {
