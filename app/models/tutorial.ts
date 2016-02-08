@@ -3,5 +3,5 @@ export interface Tutorial {
   title: string;
   body: string;
   fieldId: number;
-  elementIds: number[];
+  itemIds: number[];
 }

@@ -2,22 +2,22 @@ import {Injector, provide} from 'angular2/core';
 import {BaseRequestOptions, Http, Response, BaseResponseOptions} from 'angular2/http';
 import {MockBackend} from 'angular2/http/testing';
 import 'rxjs/Rx';
-import {ElementTypeService} from "../app/services/element-type.service";
+import {ItemsetService} from "../app/services/itemset.service";
 
 const ELEMENT_TYPES = [{
-  "name": "Element Type 1",
+  "name": "Item Type 1",
   "id": 1
 }, {
-  "name": "Element Type 2",
+  "name": "Item Type 2",
   "id": 2
 }, {
-  "name": "Element Type 3",
+  "name": "Item Type 3",
   "id": 3
 }];
 
-describe("ElementTypeService", () => {
+describe("ItemsetService", () => {
   let http: Http;
-  let elementTypeService: ElementTypeService;
+  let itemsetService: ItemsetService;
 
   beforeAll(() => {
     let injector = Injector.resolveAndCreate([
@@ -40,28 +40,28 @@ describe("ElementTypeService", () => {
   });
 
   beforeEach(() => {
-    elementTypeService = new ElementTypeService(http);
+    itemsetService = new ItemsetService(http);
   });
 
-  it("gets all element types", done => {
-    elementTypeService.getAllElementTypes().then((elementTypes) => {
-      expect(elementTypes).toEqual(ELEMENT_TYPES);
+  it("gets all itemsets", done => {
+    itemsetService.getAllItemsets().then((itemsets) => {
+      expect(itemsets).toEqual(ELEMENT_TYPES);
       done();
     });
   });
 
-  it("gets element type by id", done => {
-    elementTypeService.getElementType(1).then((elementType) => {
-      expect(elementType).toEqual({ "id": 1, "name": "Element Type 1" });
+  it("gets itemset by id", done => {
+    itemsetService.getItemset(1).then((itemset) => {
+      expect(itemset).toEqual({ "id": 1, "name": "Item Type 1" });
       done();
     });
   });
 
-  it("gets element types with ids", done => {
-    elementTypeService.getElementTypesWithIds([1, 2]).then((elementTypes) => {
-      expect(elementTypes).toEqual([
-        { "id": 1, "name": "Element Type 1" },
-        { "id": 2, "name": "Element Type 2" },
+  it("gets itemsets with ids", done => {
+    itemsetService.getItemsetsWithIds([1, 2]).then((itemsets) => {
+      expect(itemsets).toEqual([
+        { "id": 1, "name": "Item Type 1" },
+        { "id": 2, "name": "Item Type 2" },
       ]);
       done();
     });
