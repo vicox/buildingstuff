@@ -76,7 +76,8 @@ gulp.task('copy:libs', ['clean'], function() {
       gulp.src("node_modules/rxjs/bundles/Rx.min.js")
         .pipe(rename("Rx.js"))
         .pipe(gulp.dest(prodDir + '/lib')),
-      gulp.src("node_modules/angular2/bundles/angular2.min.js")
+      // use angular2.min.js when ngClass issue is fixed
+      gulp.src("node_modules/angular2/bundles/angular2.js")
         .pipe(rename("angular2.js"))
         .pipe(gulp.dest(prodDir + '/lib')),
       gulp.src("node_modules/angular2/bundles/router.min.js")
