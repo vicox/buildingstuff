@@ -9,7 +9,7 @@ System.register(["angular2/core", "angular2/http"], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var ResourceService;
+    var ItemsetService;
     return {
         setters:[
             function (core_1_1) {
@@ -19,34 +19,30 @@ System.register(["angular2/core", "angular2/http"], function(exports_1) {
                 http_1 = http_1_1;
             }],
         execute: function() {
-            ResourceService = (function () {
-                function ResourceService(_http) {
+            ItemsetService = (function () {
+                function ItemsetService(_http) {
                     this._http = _http;
                 }
-                ResourceService.prototype.getAllResources = function () {
-                    return this._http.get('server/resources.json')
+                ItemsetService.prototype.getAllItemsets = function () {
+                    return this._http.get('server/itemsets.json')
                         .map(function (res) { return res.json(); })
                         .toPromise();
                 };
-                ResourceService.prototype.getResources = function (field) {
-                    return this.getAllResources()
-                        .then(function (resources) { return resources.filter(function (r) { return r.fieldId === field.id; }); });
+                ItemsetService.prototype.getItemset = function (id) {
+                    return this.getAllItemsets()
+                        .then(function (itemset) { return itemset.filter(function (cp) { return cp.id === id; })[0]; });
                 };
-                ResourceService.prototype.getResource = function (id) {
-                    return this.getAllResources()
-                        .then(function (resources) { return resources.filter(function (r) { return r.id === id; })[0]; });
+                ItemsetService.prototype.getItemsetsWithIds = function (ids) {
+                    return this.getAllItemsets()
+                        .then(function (itemsets) { return itemsets.filter(function (et) { return ids.indexOf(et.id) > -1; }); });
                 };
-                ResourceService.prototype.getResourcesById = function (ids) {
-                    return this.getAllResources()
-                        .then(function (resources) { return resources.filter(function (r) { return ids.indexOf(r.id) > -1; }); });
-                };
-                ResourceService = __decorate([
+                ItemsetService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], ResourceService);
-                return ResourceService;
+                ], ItemsetService);
+                return ItemsetService;
             })();
-            exports_1("ResourceService", ResourceService);
+            exports_1("ItemsetService", ItemsetService);
         }
     }
 });

@@ -9,7 +9,7 @@ System.register(["angular2/core", "angular2/http"], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var ToolService;
+    var ItemService;
     return {
         setters:[
             function (core_1_1) {
@@ -19,34 +19,34 @@ System.register(["angular2/core", "angular2/http"], function(exports_1) {
                 http_1 = http_1_1;
             }],
         execute: function() {
-            ToolService = (function () {
-                function ToolService(_http) {
+            ItemService = (function () {
+                function ItemService(_http) {
                     this._http = _http;
                 }
-                ToolService.prototype.getAllTools = function () {
-                    return this._http.get('server/tools.json')
+                ItemService.prototype.getAllItems = function () {
+                    return this._http.get('server/items.json')
                         .map(function (res) { return res.json(); })
                         .toPromise();
                 };
-                ToolService.prototype.getTools = function (field) {
-                    return this.getAllTools()
-                        .then(function (tools) { return tools.filter(function (t) { return t.fieldId === field.id; }); });
+                ItemService.prototype.getItems = function (itemset) {
+                    return this.getAllItems()
+                        .then(function (items) { return items.filter(function (c) { return c.itemsetId === itemset.id; }); });
                 };
-                ToolService.prototype.getTool = function (id) {
-                    return this.getAllTools()
-                        .then(function (tools) { return tools.filter(function (t) { return t.id === id; })[0]; });
+                ItemService.prototype.getItem = function (id) {
+                    return this.getAllItems()
+                        .then(function (items) { return items.filter(function (c) { return c.id === id; })[0]; });
                 };
-                ToolService.prototype.getToolsById = function (ids) {
-                    return this.getAllTools()
-                        .then(function (tools) { return tools.filter(function (t) { return ids.indexOf(t.id) > -1; }); });
+                ItemService.prototype.getItemsWithIds = function (ids) {
+                    return this.getAllItems()
+                        .then(function (items) { return items.filter(function (e) { return ids.indexOf(e.id) > -1; }); });
                 };
-                ToolService = __decorate([
+                ItemService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], ToolService);
-                return ToolService;
+                ], ItemService);
+                return ItemService;
             })();
-            exports_1("ToolService", ToolService);
+            exports_1("ItemService", ItemService);
         }
     }
 });

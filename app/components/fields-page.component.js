@@ -28,6 +28,7 @@ System.register(["angular2/core", "./field/field-list.component", "./navigation.
                 FieldsPageComponent = __decorate([
                     core_1.Component({
                         selector: "fields",
+                        styles: ["h1 {margin-bottom: 24px}"],
                         template: "\n      <navigation></navigation>\n      <div class=\"container-fluid\">\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <h1 class=\"text-xs-center\">Choose your field</h1>\n            <field-list></field-list>\n          </div>\n        </div>\n      </div>",
                         directives: [field_list_component_1.FieldListComponent, navigation_component_1.NavigationComponent]
                     }), 

@@ -42,7 +42,7 @@ System.register(["angular2/core", "angular2/router", "../../services/field.servi
                     core_1.Component({
                         selector: "field-list",
                         styles: [".card {cursor: pointer}"],
-                        template: "\n      <div *ngFor=\"#field of fields\" class=\"card text-xs-center card-buildingstuff-field\" (click)=\"gotoField(field)\">\n        <div class=\"card-block\">\n          <h4 class=\"card-title\">{{field.name}}</h4>\n        </div>\n      </div>",
+                        template: "\n      <div class=\"row\">\n        <div *ngFor=\"#field of fields\" class=\"col-xs-12\" [ngClass]=\"{'col-sm-6': fields.length > 1, 'col-md-4': fields.length > 2, 'col-lg-3': fields.length > 3, 'col-xl-2': fields.length > 5}\">\n          <div class=\"card text-xs-center card-buildingstuff-field\" (click)=\"gotoField(field)\">\n            <div class=\"card-block\">\n              <h4 class=\"card-title\">{{field.name}}</h4>\n            </div>\n          </div>\n        </div>\n      </div>",
                         directives: [router_1.ROUTER_DIRECTIVES],
                         providers: [field_service_1.FieldService]
                     }), 
