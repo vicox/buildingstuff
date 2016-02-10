@@ -31,20 +31,20 @@ export class ItemListComponent {
   loadItems() {
     this._itemService.getItemsWithIds(this.tutorial.itemIds)
       .then(items => {
-        let itemsByTypeId = {};
+        let itemsBySetId = {};
         for (let i = 0; i < items.length; i++) {
           let item = items[i];
-          if (!itemsByTypeId.hasOwnProperty(item.itemsetId)) {
-              itemsByTypeId[item.itemsetId] = [];
+          if (!itemsBySetId.hasOwnProperty(item.itemsetId)) {
+              itemsBySetId[item.itemsetId] = [];
           }
-          itemsByTypeId[item.itemsetId].push(item);
+          itemsBySetId[item.itemsetId].push(item);
         }
-        this._itemsetService.getItemsetsWithIds(Object.keys(itemsByTypeId).map(id => parseInt(id)))
+        this._itemsetService.getItemsetsWithIds(Object.keys(itemsBySetId).map(id => parseInt(id)))
           .then(itemsets => {
             this.groupedItems = [];
             for (let i = 0; i < itemsets.length; i++) {
               let itemset = itemsets[i];
-              this.groupedItems.push({ itemset: itemset, items: itemsByTypeId[itemset.id] });
+              this.groupedItems.push({ itemset: itemset, items: itemsBySetId[itemset.id] });
             }
           });
       });

@@ -22,15 +22,15 @@ describe("ItemListComponent", () => {
       { "itemsetId": 1, "name": "Item 2", "id": 2 },
       { "itemsetId": 2, "name": "Item 3", "id": 3 }
     ];
-    let itemsTypes = [
-      { "name": "Item Type 1", "id": 1 },
-      { "name": "Item Type 2", "id": 2 }
+    let itemsets = [
+      { "name": "Itemset 1", "id": 1 },
+      { "name": "Itemset 2", "id": 2 }
     ];
 
     let tutorial = <Tutorial>{itemIds: [1, 2, 3]};
 
     let itemPromise: Promise<Item[]> = Promise.resolve(items);
-    let itemsetPromise: Promise<Itemset[]> = Promise.resolve(itemsTypes);
+    let itemsetPromise: Promise<Itemset[]> = Promise.resolve(itemsets);
     (<jasmine.Spy>itemService.getItemsWithIds).and.callFake(ids => ids === tutorial.itemIds && itemPromise || Promise.resolve());
     (<jasmine.Spy>itemsetService.getItemsetsWithIds).and.callFake(ids => ids[0] === 1 && ids[1] == 2 && itemsetPromise || Promise.resolve());
 
@@ -41,14 +41,14 @@ describe("ItemListComponent", () => {
       itemsetPromise.then(() => {
         expect(itemListComponent.groupedItems).toEqual([
           {
-            itemset: {"name": "Item Type 1", "id": 1 },
+            itemset: {"name": "Itemset 1", "id": 1 },
             items: [
               { "itemsetId": 1, "name": "Item 1", "id": 1 },
               { "itemsetId": 1, "name": "Item 2", "id": 2 }
             ]
           },
           {
-            itemset: { "name": "Item Type 2", "id": 2 },
+            itemset: { "name": "Itemset 2", "id": 2 },
             items: [
               { "itemsetId": 2, "name": "Item 3", "id": 3 }
             ]
