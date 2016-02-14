@@ -4,10 +4,16 @@ import {Field} from "../models/field";
 
 @Component({
     selector: "navigation",
+    styles:[
+      ".navbar-brand {font-weight: bold}",
+      ".buildingstuff {color: #3581B8}",
+      ".rocks {color: #FCB07E}",
+      ".field {color: #777777}",
+      "a {text-decoration: none}"
+    ],
     template: `
       <nav class="navbar navbar-light bg-faded">
-        <a *ngIf="field" class="navbar-buildingstuff-field" [routerLink]="['Field', {id: field.id}]">{{field.name}}</a>
-        <a class="navbar-brand" [routerLink]="['Fields']"><img alt="Brand" src="/app/assets/images/buildingstuff_logo.png"></a>
+        <span class="navbar-brand"><a [routerLink]="['Fields']"><span class="buildingstuff">BuildingStuff</span><span class="rocks">.rocks</span></a> <a *ngIf="field" class="field" [routerLink]="['Field', {id: field.id}]">/{{field.name}}</a></span>
         <!--
         <ul class="nav navbar-nav">
           <li class="nav-item active">
