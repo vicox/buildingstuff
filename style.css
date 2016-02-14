@@ -21,3 +21,11 @@ pre {
   padding: 1.5rem;
   background-color: #f7f7f9;
 }
+
+app .background {
+  text-align: center;
+  margin-top: 150px;
+  color: #EBE9E9;
+  font-weight: bold;
+  font-size: 2rem;
+}
