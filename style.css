@@ -14,7 +14,9 @@ h2 {
 }
 
 .navbar {
+  padding: 1rem 1rem;
 	margin-bottom: 20px;
+  background-color: #F3F8F2;
 }
 
 pre {
