@@ -8,8 +8,8 @@ import {TutorialPageComponent} from "./components/tutorial-page.component";
     selector: "app",
     styles: [".alert {margin-bottom: 0}"],
     template: `
-      <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div *ngIf="youtubeAlertDismissed === false" class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" (click)="dismiss()" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <strong>This website is work in progress!</strong> Check out my <a href="https://www.youtube.com/user/vicox1000">Youtube channel</a> to see the videos where this website is being build.
       </div>
       <router-outlet></router-outlet>`,
@@ -22,4 +22,16 @@ import {TutorialPageComponent} from "./components/tutorial-page.component";
     { path: "/tutorial/:id", name: "Tutorial", component: TutorialPageComponent }
 ])
 
-export class AppComponent { }
+export class AppComponent {
+
+  public youtubeAlertDismissed: Boolean;
+
+  constructor() {
+    this.youtubeAlertDismissed = localStorage.getItem('youtubeAlertDismissed') === 'true' || false;
+  }
+
+  dismiss() {
+    this.youtubeAlertDismissed = true;
+    localStorage.setItem('youtubeAlertDismissed', 'true');
+  }
+ }
