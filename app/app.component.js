@@ -30,12 +30,17 @@ System.register(["angular2/core", "angular2/router", "./components/fields-page.c
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
+                    this.youtubeAlertDismissed = localStorage.getItem('youtubeAlertDismissed') === 'true' || false;
                 }
+                AppComponent.prototype.dismiss = function () {
+                    this.youtubeAlertDismissed = true;
+                    localStorage.setItem('youtubeAlertDismissed', 'true');
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: "app",
                         styles: [".alert {margin-bottom: 0}"],
-                        template: "\n      <div class=\"alert alert-warning alert-dismissible\" role=\"alert\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n        <strong>This website is work in progress!</strong> Check out my <a href=\"https://www.youtube.com/user/vicox1000\">Youtube channel</a> to see the videos where this website is being build.\n      </div>\n      <router-outlet></router-outlet>",
+                        template: "\n      <div *ngIf=\"youtubeAlertDismissed === false\" class=\"alert alert-warning alert-dismissible\" role=\"alert\">\n        <button type=\"button\" (click)=\"dismiss()\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n        <strong>This website is work in progress!</strong> Check out my <a href=\"https://www.youtube.com/user/vicox1000\">Youtube channel</a> to see the videos where this website is being build.\n      </div>\n      <router-outlet></router-outlet>",
                         directives: [router_1.ROUTER_DIRECTIVES],
                         providers: [router_1.ROUTER_PROVIDERS]
                     }),

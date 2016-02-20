@@ -29,7 +29,14 @@ System.register(["angular2/core", "angular2/router"], function(exports_1) {
                 NavigationComponent = __decorate([
                     core_1.Component({
                         selector: "navigation",
-                        template: "\n      <nav class=\"navbar navbar-light bg-faded\">\n        <a *ngIf=\"field\" class=\"navbar-buildingstuff-field\" [routerLink]=\"['Field', {id: field.id}]\">{{field.name}}</a>\n        <a class=\"navbar-brand\" [routerLink]=\"['Fields']\"><img alt=\"Brand\" src=\"/app/assets/images/buildingstuff_logo.png\"></a>\n        <!--\n        <ul class=\"nav navbar-nav\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" href=\"#\">Features</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" href=\"#\">Pricing</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" href=\"#\">About</a>\n          </li>\n        </ul>\n        <form class=\"form-inline pull-xs-right\">\n          <input class=\"form-control\" type=\"text\" placeholder=\"Search\">\n          <button class=\"btn btn-success-outline\" type=\"submit\">Search</button>\n        </form>\n        -->\n      </nav>",
+                        styles: [
+                            ".navbar-brand {font-weight: bold}",
+                            ".buildingstuff {color: #3581B8}",
+                            ".rocks {color: #FCB07E}",
+                            ".field {color: #777777}",
+                            "a {text-decoration: none}"
+                        ],
+                        template: "\n      <nav class=\"navbar navbar-light bg-faded\">\n        <span class=\"navbar-brand\"><a [routerLink]=\"['Fields']\"><span class=\"buildingstuff\">BuildingStuff</span><span class=\"rocks\">.rocks</span></a> <a *ngIf=\"field\" class=\"field\" [routerLink]=\"['Field', {id: field.id}]\">/{{field.name}}</a></span>\n        <!--\n        <ul class=\"nav navbar-nav\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" href=\"#\">Features</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" href=\"#\">Pricing</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" href=\"#\">About</a>\n          </li>\n        </ul>\n        <form class=\"form-inline pull-xs-right\">\n          <input class=\"form-control\" type=\"text\" placeholder=\"Search\">\n          <button class=\"btn btn-success-outline\" type=\"submit\">Search</button>\n        </form>\n        -->\n      </nav>",
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [])

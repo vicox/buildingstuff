@@ -1,24 +1,33 @@
+body {
+  font-family: "Titillium Web", sans-serif;
+}
+
+h1 {
+  padding-bottom: 0.3em;
+}
+
+h2 {
+  padding-bottom: 0.3em;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
 .navbar {
+  padding: 1rem 1rem;
 	margin-bottom: 20px;
-}
-
-.navbar-brand {
-	position: relative;
-}
-
-.navbar-buildingstuff-field,
-.navbar-buildingstuff-field:hover {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    text-align: center;
-    margin: auto;
-    color: #777;
-    font-size: 20px;
-    text-decoration: none;
+  background-color: #F3F8F2;
 }
 
 pre {
   padding: 1.5rem;
   background-color: #f7f7f9;
+}
+
+app .background {
+  text-align: center;
+  margin-top: 150px;
+  color: #EBE9E9;
+  font-weight: bold;
+  font-size: 2rem;
 }
